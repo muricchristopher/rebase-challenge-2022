@@ -1,9 +1,14 @@
 #!/bin/bash
 
+docker network create rebase
+
 docker run \
+  --network rebase \
   --rm \
+  --name ruby_server_rebase \
   -w /app \
   -v $(pwd):/app \
-  -p 1234:1234 \
+  -v gems:/usr/local/bundle/ \
+  -p 3000:3000 \
   ruby \
-  bash -c "gem install rack sinatra puma && ruby server.rb"
+  bash -c "bundle install && rackup server.rb -p 3000 -o 0.0.0.0"

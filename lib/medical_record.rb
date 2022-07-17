@@ -25,26 +25,28 @@ class MedicalRecord < DBConnection
       sql_write("INSERT INTO medical_records (patient_cpf, patient_name, patient_email, patient_birthday, patient_address, patient_city, patient_state, doctor_crm, doctor_crm_state, doctor_name, doctor_email, result_token, result_date, test_type, test_limits, test_result) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)", [@patient_cpf, @patient_name, @patient_email, @patient_birthday, @patient_address, @patient_city, @patient_state, @doctor_crm, @doctor_crm_state, @doctor_name, @doctor_email, @result_token, @result_date, @test_type, @test_limits, @test_result])
    end
 
-   def self.db_setup
-      db_drop && db_create
-   end
-
-   def self.db_drop
-      conn = DBConnection.new
-
-      conn.sql_write("DROP TABLE IF EXISTS medical_records")
-   end
-
-   def self.db_create
-      conn = DBConnection.new
-
-      conn.sql_write("CREATE TABLE medical_records (id SERIAL PRIMARY KEY, patient_cpf TEXT, patient_name TEXT, patient_email TEXT, patient_birthday TEXT, patient_address TEXT, patient_city TEXT, patient_state TEXT, doctor_crm TEXT, doctor_crm_state TEXT, doctor_name TEXT, doctor_email TEXT, result_token TEXT, result_date TEXT, test_type TEXT, test_limits TEXT, test_result TEXT)")
+   def self.db_prepare
+      db_drop_table && db_create_table
    end
 
    def self.all
       conn = DBConnection.new
 
       conn.sql_write("SELECT * FROM medical_records")
+   end
+
+   private
+
+   def self.db_drop_table
+      conn = DBConnection.new
+
+      conn.sql_write("DROP TABLE IF EXISTS medical_records")
+   end
+
+   def self.db_create_table
+      conn = DBConnection.new
+
+      conn.sql_write("CREATE TABLE medical_records (id SERIAL PRIMARY KEY, patient_cpf TEXT, patient_name TEXT, patient_email TEXT, patient_birthday TEXT, patient_address TEXT, patient_city TEXT, patient_state TEXT, doctor_crm TEXT, doctor_crm_state TEXT, doctor_name TEXT, doctor_email TEXT, result_token TEXT, result_date TEXT, test_type TEXT, test_limits TEXT, test_result TEXT)")
    end
 end
 

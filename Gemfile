@@ -11,5 +11,5 @@ gem "tilt-jbuilder", ">= 0.4.0", :require => "sinatra/jbuilder"
 
 group :test, :development do
   gem 'rspec'
+  gem 'rack-test'
 end
-

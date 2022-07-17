@@ -21,7 +21,6 @@ describe Server, type: :request do
          response = get "/tests"
          json_response = JSON.parse(response.body)
 
-         expect(response.content_type).to include('application/json')
          expect(response.status).to eq(200)
          expect(json_response).to eq("No medical records found")
       end

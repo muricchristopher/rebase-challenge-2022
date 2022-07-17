@@ -12,7 +12,7 @@ class Server < Sinatra::Base
   get '/tests' do
     @tests = MedicalRecord.all
 
-    return "No medical record found".to_json if @tests.empty?
+    return "No medical records found".to_json if @tests.empty?
 
     jbuilder :tests
   end

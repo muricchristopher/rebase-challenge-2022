@@ -1,4 +1,5 @@
 require 'spec_helper'
+require './lib/medical_record'
 
 describe Server, type: :request do
    context "GET /tests" do
@@ -23,6 +24,23 @@ describe Server, type: :request do
 
          expect(response.status).to eq(200)
          expect(json_response).to eq("No medical records found")
+      end
+   end
+
+   context "POST /import" do
+      csv = Rack::Test::UploadedFile.new('./test_data.csv', 'csv')
+
+      it "should import a csv file to database" do
+         response = post('/import', csv_file: csv)
+
+         expect(MedicalRecord.all.length).to eq(42)
+         expect(response.status).to eq(201)
+      end
+
+      it "should return status 500 when no files are assigned to the request" do
+         response = post '/import'
+
+         expect(response.status).to eq(500)
       end
    end
 end

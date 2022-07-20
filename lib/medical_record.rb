@@ -35,6 +35,12 @@ class MedicalRecord < DBConnection
       conn.sql_write("SELECT * FROM medical_records")
    end
 
+   def self.find_test_by_token(token)
+      conn = DBConnection.new
+
+      conn.sql_write("SELECT * FROM medical_records WHERE result_token='#{token}'")
+   end
+
    private
 
    def self.db_drop_table
@@ -49,5 +55,4 @@ class MedicalRecord < DBConnection
       conn.sql_write("CREATE TABLE medical_records (id SERIAL PRIMARY KEY, patient_cpf TEXT, patient_name TEXT, patient_email TEXT, patient_birthday TEXT, patient_address TEXT, patient_city TEXT, patient_state TEXT, doctor_crm TEXT, doctor_crm_state TEXT, doctor_name TEXT, doctor_email TEXT, result_token TEXT, result_date TEXT, test_type TEXT, test_limits TEXT, test_result TEXT)")
    end
 end
-
 

@@ -35,6 +35,21 @@ class Server < Sinatra::Base
     jbuilder :tests
   end
 
+  get 'nada' do
+    MedicalRecord.db_prepare
+  end
+
+  get '/tests/:token' do
+    content_type :json
+    token = params["token"]
+
+    @tests = MedicalRecord.find_test_by_token(token)
+
+    return [404, { :error => "Could not find a medical record with token -> #{token}" }.to_json] if @tests.empty?
+
+    jbuilder :tests_by_token
+  end
+
   post "/import_sync" do
     file = params["csv_file"]["tempfile"]
     csv = CSVHandler.read_file(file)
@@ -59,4 +74,6 @@ class Server < Sinatra::Base
       422
     end
   end
+  Server.run! if app_file == $0
+
 end

@@ -7,6 +7,8 @@ gem 'puma'
 gem 'rake'
 gem 'rack'
 gem 'pg'
+gem 'sidekiq'
+gem 'redis'
 gem "tilt-jbuilder", ">= 0.4.0", :require => "sinatra/jbuilder"
 
 group :test, :development do

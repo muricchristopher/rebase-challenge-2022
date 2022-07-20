@@ -27,18 +27,38 @@ describe Server, type: :request do
       end
    end
 
-   context "POST /import" do
+   context "POST /import_sync" do
       csv = Rack::Test::UploadedFile.new('./test_data.csv', 'csv')
 
-      it "should import a csv file to database" do
-         response = post('/import', csv_file: csv)
+      it "should import a csv file into database" do
+         response = post('/import_sync', csv_file: csv)
+         json_response = JSON.parse(response.body)
 
+         expect(json_response["message"]).to eq("File successfully imported to DB")
          expect(MedicalRecord.all.length).to eq(42)
          expect(response.status).to eq(201)
       end
 
       it "should return status 500 when no files are assigned to the request" do
-         response = post '/import'
+         response = post '/import_sync', csv_file: nil
+
+         expect(response.status).to eq(500)
+      end
+   end
+
+   context "POST /import" do
+      csv = Rack::Test::UploadedFile.new('./test_data.csv', 'csv')
+
+      it "should import csv file asynchronously into database" do
+         response = post('/import', csv_file: csv)
+         json_response = JSON.parse(response.body)
+
+         expect(json_response["message"]).to eq("File successfully queued to be imported")
+         expect(response.status).to eq(201)
+      end
+
+      it "should return status 500 when no files are assigned to the request" do
+         response = post '/import', csv_file: nil
 
          expect(response.status).to eq(500)
       end

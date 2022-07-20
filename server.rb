@@ -35,10 +35,6 @@ class Server < Sinatra::Base
     jbuilder :tests
   end
 
-  get 'nada' do
-    MedicalRecord.db_prepare
-  end
-
   get '/tests/:token' do
     content_type :json
     token = params["token"]

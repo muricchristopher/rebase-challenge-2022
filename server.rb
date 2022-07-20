@@ -74,6 +74,4 @@ class Server < Sinatra::Base
       422
     end
   end
-  Server.run! if app_file == $0
-
 end

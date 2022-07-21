@@ -1,6 +1,5 @@
 require 'pg'
 require './lib/medical_record'
-require 'byebug'
 
 namespace :db do
    task :setup_development do
@@ -22,17 +21,6 @@ namespace :db do
       MedicalRecord.db_prepare
 
       ENV['RACK_ENV'] = 'development'
-   end
-
-   task :create do
-      ENV['RACK_ENV'] ||= 'development'
-
-      MedicalRecord.db_create
-   end
-
-   task :drop do
-      ENV['RACK_ENV'] ||= 'development'
-
-      MedicalRecord.db_drop
+      pp "Sucessfully prepared DB in test environment"
    end
 end

@@ -28,9 +28,11 @@ class Server < Sinatra::Base
   set :port, 3000
 
   get '/tests' do
+    content_type :json
+
     @tests = MedicalRecord.all
 
-    return "No medical records found".to_json if @tests.empty?
+    return { message: "No medical records found" }.to_json if @tests.empty?
 
     jbuilder :tests
   end
@@ -54,6 +56,7 @@ class Server < Sinatra::Base
       csv.each do | row |
         MedicalRecord.new(row).create
       end
+      
       [201, { message: 'File successfully imported to DB' }.to_json]
     rescue
       422

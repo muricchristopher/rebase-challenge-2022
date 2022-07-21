@@ -4,7 +4,7 @@ API em Ruby para listagem de exames médicos.
 
 ## Requisitos
 
-Acesse os requisitos dos desafios [aqui](https://git.campuscode.com.br/core-team/rebase-challenge-2022).
+Acesse os requisitos dos desafios [aqui](docs/challenge_instructions.md).
 
 ## Tech Stack
 

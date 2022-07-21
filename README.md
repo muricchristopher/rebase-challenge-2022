@@ -14,6 +14,7 @@ Acesse os requisitos dos desafios [aqui](docs/challenge_instructions.md).
 - [Redis](https://redis.io/)
 
 <hr>
+
 ## Executando a aplicação
 
 0. Instalar o [Docker](https://docs.docker.com/engine/install/), caso ainda não tenha instalado e configurado-o propiamente;

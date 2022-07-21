@@ -11,8 +11,11 @@ gem 'sidekiq'
 gem 'redis'
 gem "tilt-jbuilder", ">= 0.4.0", :require => "sinatra/jbuilder"
 
+group :test do
+  gem 'rspec-sidekiq'
+end
+
 group :test, :development do
   gem 'rspec'
   gem 'rack-test'
-  gem 'rspec-sidekiq'
 end

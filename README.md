@@ -45,7 +45,7 @@ docker exec -ti ruby_server bash -c 'rake db:setup_development'
 1. Configure o banco de dados para testes, caso essa seja a primeira execução dos mesmos:
 
 ```bash
-docker exec -ti ruby_server bash -c 'rake db:setup_test'
+docker exec -ti ruby_server bash -c 'RACK_ENV="test" rake db:setup_test'
 ```
 
 2. Rode os testes com o commando _rspec_:

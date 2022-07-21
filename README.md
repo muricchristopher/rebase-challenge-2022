@@ -15,6 +15,7 @@ Acesse os requisitos dos desafios [aqui](https://git.campuscode.com.br/core-team
 
 <hr>
 
+
 ## Executando a aplicação
 
 0. Instalar o [Docker](https://docs.docker.com/engine/install/), caso ainda não tenha instalado e configurado-o propiamente;
@@ -40,6 +41,7 @@ docker exec -ti ruby_server bash -c 'rake db:setup_development'
 
 4. Acesse a aplicação em http://localhost:3000/tests.
 
+
 ## Testando
 
 1. Configure o banco de dados para testes, caso essa seja a primeira execução dos mesmos:
@@ -54,6 +56,7 @@ docker exec -ti ruby_server bash -c 'rake db:setup_test'
 docker exec -ti ruby_server bash -c 'bundle exec rspec'
 ```
 
+
 ## Populando o Banco de Dados
 
 1. Rode o seguinte comando:
@@ -61,6 +64,7 @@ docker exec -ti ruby_server bash -c 'bundle exec rspec'
 ```bash
 docker exec -ti ruby_server bash -c 'ruby import_from_csv.rb'
 ```
+
 
 ## Documentação da API
 

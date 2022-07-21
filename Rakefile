@@ -1,6 +1,6 @@
 require 'pg'
 require './lib/medical_record'
-require 'byebug'
+
 namespace :db do
    task :setup_development do
       conn = DBConnection.new(root: true)

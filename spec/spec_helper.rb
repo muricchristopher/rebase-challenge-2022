@@ -1,6 +1,8 @@
 require_relative '../server'
 require 'setup/setup_test_database'
 require 'rack/test'
+require 'sidekiq/testing/inline'
+require 'rspec-sidekiq'
 
 ENV['RACK_ENV'] = 'test'
 module RSpecMixin

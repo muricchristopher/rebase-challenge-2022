@@ -1,6 +1,5 @@
 require 'pg'
 require 'yaml'
-require 'byebug'
 class DBConnection
    attr_accessor :database, :host, :port, :password, :user
 

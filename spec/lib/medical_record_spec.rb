@@ -1,7 +1,6 @@
 require 'spec_helper'
 require './lib/medical_record'
 require './config/dbconnection'
-require 'byebug'
 
 describe MedicalRecord do
    context "#create" do

@@ -1,5 +1,4 @@
 require 'csv'
-require 'byebug'
 require './lib/medical_record'
 require './utils/csv_handler.rb'
 

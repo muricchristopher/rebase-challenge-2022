@@ -1,0 +1,58 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ruby_server
+    working_dir: /app
+    command: "rackup server.rb -p 3000 -o 0.0.0.0"
+    depends_on:
+      - postgres_db
+      - sidekiq
+    ports:
+      - 3000:3000
+    networks:
+      - rebase-network
+    volumes:
+      - $PWD:/app
+      - gems:/usr/local/bundle
+    environment:
+      RACK_ENV: development
+      REDIS_URL: redis://redis:6379
+
+  db:
+    container_name: postgres_db
+    image: postgres:alpine
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - rebase-network
+
+  redis:
+    container_name: redis
+    image: redis
+    networks:
+      - rebase-network
+
+  sidekiq:
+    image: ruby
+    container_name: sidekiq
+    working_dir: /app
+    volumes:
+      - .:/app/app/
+      - gems:/usr/local/bundle
+    networks:
+      - rebase-network
+    environment:
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - redis
+    command: bash -c "cd app/ && bundle install && bundle exec sidekiq -r ./server.rb"
+
+networks:
+  rebase-network:
+    driver: bridge
+
+volumes:
+  gems:
+  db_data:

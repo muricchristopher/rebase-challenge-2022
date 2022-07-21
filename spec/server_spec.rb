@@ -23,7 +23,7 @@ describe Server, type: :request do
          json_response = JSON.parse(response.body)
 
          expect(response.status).to eq(200)
-         expect(json_response).to eq("No medical records found")
+         expect(json_response["message"]).to eq("No medical records found")
       end
    end
 

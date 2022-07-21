@@ -1,6 +1,8 @@
 require 'spec_helper'
 require './workers/csv_worker'
 require './lib/medical_record'
+require 'sidekiq/testing'
+Sidekiq::Testing.fake!
 
 describe CSVJob do
    context 'perform' do

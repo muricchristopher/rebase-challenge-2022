@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../server'
 require 'setup/setup_test_database'
 require 'rack/test'
@@ -6,8 +8,6 @@ require 'rspec-sidekiq'
 
 ENV['RACK_ENV'] = 'test'
 module RSpecMixin
-  include Rack::Test::Methods
-
   def app
     Server.new
   end
@@ -21,7 +21,6 @@ RSpec::Sidekiq.configure do |config|
   # Warn when jobs are not enqueued to Redis but to a job array
   config.warn_when_jobs_not_processed_by_sidekiq = true # default => true
 end
-
 
 RSpec.configure do |config|
   ENV['RACK_ENV'] = 'test'
